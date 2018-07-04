@@ -1,3 +1,4 @@
 import SearchableFlatList from "./SearchableFlatList";
+import SearchableSectionList from "./SearchableSectionList";
 
-export { SearchableFlatList }
+export { SearchableFlatList, SearchableSectionList }
