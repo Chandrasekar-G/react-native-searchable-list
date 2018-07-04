@@ -1,0 +1,35 @@
+{
+  "name": "react-native-searchable-list",
+  "version": "1.0.0",
+  "description": "A Wrapper around FlatList and SectionList with search feature.",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Chandrasekar-G/react-native-searchable-list.git"
+  },
+  "keywords": [
+    "react-native",
+    "flat-list",
+    "section-list"
+  ],
+  "author": "Chandrasekar Gokulanathan",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Chandrasekar-G/react-native-searchable-list/issues"
+  },
+  "homepage": "https://github.com/Chandrasekar-G/react-native-searchable-list#readme",
+  "peerDependencies": {
+    "react": "^16.0.0-alpha.12",
+    "react-native": "^0.44.0"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "babel-jest": "23.2.0",
+    "babel-preset-react-native": "4.0.0",
+    "jest": "23.2.0",
+    "react-test-renderer": "16.3.1"
+  }
+}
