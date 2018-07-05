@@ -6,6 +6,23 @@ A powerful wrapper around React Native FlatList and SectionList to provide built
 
 [![NPM](https://nodei.co/npm/react-native-searchable-list.png?downloads=true&downloadRank=true&stars=true)](https://nodei.co/npm/react-native-searchable-list/)
 
+<!-- TOC -->
+
+- [react-native-searchable-list](#react-native-searchable-list)
+        - [Motivation](#motivation)
+        - [Installation](#installation)
+        - [Usage](#usage)
+        - [Example](#example)
+            - [1. SearchableFlatList](#1-searchableflatlist)
+                - [1.1 Simple Array Data](#11-simple-array-data)
+                - [Usage](#usage-1)
+                - [1.2 Array of Objects](#12-array-of-objects)
+                - [Usage](#usage-2)
+                - [1.3 Array of Complex Objects](#13-array-of-complex-objects)
+                - [Usage](#usage-3)
+
+<!-- /TOC -->
+
 ### Motivation
 
 `react-native-searchable-list` is designed to be simple yet a powerful wrapper around react native's FlatList and SectionList components to provide them with search functionality.
@@ -130,10 +147,17 @@ render() {
       ignoreCase={ignoreCase} 
       renderItem={({ item }) => ( <Text style={styles.listItem}>{item.name}</Text> )}
       keyExtractor={item => item.id} />
+}
 ```
 
+| Props            | Description                           | Value                                                                         | Required               |
+| ---------------- | ------------------------------------- | ----------------------------------------------------------------------------- | ------------------------ |
+| `data`           | Data for the FlatList                    | `array`                                                                | :heavy_check_mark:       |
+| `searchTerm`     | Searching Term being input by the user. Typically this will be a state variable bound to a text input                        | `string`                                                                      | :heavy_check_mark:       |
+| `searchAttribute` | Attribute to be searched in case of array of objects. This will be empty in case of a simple array data | `string`                                                                      | :heavy_multiplication_x:       |
+| `ignoreCase`           | Case sensitive / Case insensitive search. By default this will be set to true                       | `boolean` | :heavy_multiplication_x: |
 
-
+By default this inherits all the props of a React Native Flat List.
 
 
 
