@@ -12,13 +12,13 @@ A powerful wrapper around React Native FlatList and SectionList to provide built
 
 ### Installation
 
-```
+```shell
 npm i react-native-searchable-list --save
 ```
 
 ### Usage
 
-```
+```js
 import { SearchableFlatList } from "react-native-searchable-list";
 
  <SearchableFlatList
@@ -30,3 +30,73 @@ import { SearchableFlatList } from "react-native-searchable-list";
           keyExtractor={item => item.id}
         />
 ``` 
+
+### Example
+
+#### 1. SearchableFlatList
+
+![Simple Flat List](https://github.com/Chandrasekar-G/RNSearchableListDemo/blob/master/Assets/FlatList-1.gif)
+
+##### Usage
+```js
+
+this.state = {
+      data: [ "Taj Mahal",   "Great Wall of China", "Machu Picchu", "Christ the Redeemer", "Chichen Itza", "Roman Colosseum", "Petra" ],
+      searchTerm: "",
+      searchAttribute: "",
+      ignoreCase: true
+    };
+
+<TextInput
+  style={styles.search} placeholder={"Search Wonders"}
+  onChangeText={searchTerm => this.setState({ searchTerm })} />
+
+<SearchableFlatList 
+  style={styles.list} data={data}
+  searchTerm={searchTerm} ignoreCase={ignoreCase} 
+  renderItem={({ item }) => ( <Text style={styles.listItem}>{item}</Text> )}
+  keyExtractor={item => item} />
+
+```
+##### 1.1 Simple Array Data
+##### 1.2 Array of Objects
+##### 1.3 Array of Complex Objects
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
