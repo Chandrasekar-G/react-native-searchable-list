@@ -7,37 +7,46 @@ export default class SearchableSectionList extends Component {
     sections: PropTypes.array.isRequired,
     searchTerm: PropTypes.string.isRequired,
     searchAttribute: PropTypes.string.isRequired,
+    searchByTitle: PropTypes.string.bool,
     ignoreCase: PropTypes.bool
   };
 
   static defaultProps = {
     searchAttribute: "",
+    searchByTitle: false,
     ignoreCase: true
   };
 
   render() {
-    const { sections, searchAttribute, searchTerm, ignoreCase } = this.props;
+    const { sections, searchAttribute, searchTerm, ignoreCase, searchByTitle } = this.props;
     return (
       <SectionList
         {...this.props}
         sections={sections.filter(sectionData => {
-          sectionData = sectionData.data;
+          sectionData = searchByTitle ? sectionData.title : sectionData.data;
           let searchData = sectionData;
-
-          return searchData.some(data => {
-            let searchDataItem = searchAttribute
-              ? searchAttribute
-                  .split(".")
-                  .reduce((prevVal, currVal) => prevVal[currVal], data)
-              : data;
-            if (ignoreCase) {
-              return searchDataItem
-                .toLowerCase()
-                .includes(searchTerm.toLowerCase());
-            } else {
-              return searchDataItem.includes(searchTerm);
-            }
-          });
+          if(searchByTitle) {
+            return searchData.includes(searchTerm);
+          } else {
+            return searchData.some(data => {
+              let searchDataItem = searchAttribute
+                ? searchAttribute
+                    .split(".")
+                    .reduce((prevVal, currVal) => prevVal[currVal], data)
+                : data;
+              if (ignoreCase) {
+                if (
+                  searchDataItem.toLowerCase().includes(searchTerm.toLowerCase())
+                ) {
+                  return data;
+                }
+              } else {
+                if (searchDataItem.includes(searchTerm)) {
+                  return data;
+                }
+              }
+            });
+          }
         })}
       />
     );
