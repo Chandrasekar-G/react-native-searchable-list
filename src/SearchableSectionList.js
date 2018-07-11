@@ -30,16 +30,15 @@ export default class SearchableSectionList extends Component {
         {...this.props}
         sections={sections.reduce((result, sectionData) => {
           const { title, data } = sectionData;
-          let searchDataItem = title;
           const filteredData = data.filter(item => {
+            let searchDataItem = title;
             if (!searchByTitle) {
-              let searchDataItem = searchAttribute
+              searchDataItem = searchAttribute
                 ? searchAttribute
                     .split(".")
                     .reduce((prevVal, currVal) => prevVal[currVal], item)
                 : item;
             }
-            
             if (ignoreCase) {
               return searchDataItem
                 .toLowerCase()
