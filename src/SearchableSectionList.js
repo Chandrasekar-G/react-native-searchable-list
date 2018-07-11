@@ -7,7 +7,7 @@ export default class SearchableSectionList extends Component {
     sections: PropTypes.array.isRequired,
     searchTerm: PropTypes.string.isRequired,
     searchAttribute: PropTypes.string.isRequired,
-    searchByTitle: PropTypes.string.bool,
+    searchByTitle: PropTypes.bool,
     ignoreCase: PropTypes.bool
   };
 
@@ -18,36 +18,46 @@ export default class SearchableSectionList extends Component {
   };
 
   render() {
-    const { sections, searchAttribute, searchTerm, ignoreCase, searchByTitle } = this.props;
+    const {
+      sections,
+      searchAttribute,
+      searchTerm,
+      ignoreCase,
+      searchByTitle
+    } = this.props;
     return (
       <SectionList
         {...this.props}
-        sections={sections.filter(sectionData => {
-          sectionData = searchByTitle ? sectionData.title : sectionData.data;
-          let searchData = sectionData;
-          if(searchByTitle) {
-            return searchData.includes(searchTerm);
-          } else {
-            return searchData.some(data => {
+        sections={sections.reduce((result, sectionData) => {
+          const { title, data } = sectionData;
+          let searchDataItem = title;
+          const filteredData = data.filter(item => {
+            if (!searchByTitle) {
               let searchDataItem = searchAttribute
                 ? searchAttribute
                     .split(".")
-                    .reduce((prevVal, currVal) => prevVal[currVal], data)
-                : data;
-              if (ignoreCase) {
-                if (
-                  searchDataItem.toLowerCase().includes(searchTerm.toLowerCase())
-                ) {
-                  return data;
-                }
-              } else {
-                if (searchDataItem.includes(searchTerm)) {
-                  return data;
-                }
-              }
+                    .reduce((prevVal, currVal) => prevVal[currVal], item)
+                : item;
+            }
+            
+            if (ignoreCase) {
+              return searchDataItem
+                .toLowerCase()
+                .includes(searchTerm.toLowerCase());
+            } else {
+              return searchDataItem.includes(searchTerm);
+            }
+          });
+
+          if (filteredData.length !== 0) {
+            result.push({
+              title,
+              data: filteredData
             });
           }
-        })}
+
+          return result;
+        }, [])}
       />
     );
   }

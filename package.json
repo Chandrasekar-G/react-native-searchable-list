@@ -1,6 +1,6 @@
 {
   "name": "react-native-searchable-list",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "A Wrapper around FlatList and SectionList with search feature.",
   "main": "src/index.js",
   "scripts": {
